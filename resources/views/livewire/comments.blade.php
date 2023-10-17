@@ -6,6 +6,13 @@
                 {{ session('message') }}
             </div>
         @endif
+
+        <section>
+            @if ($image)
+                <img src="{{ $image }}" width="200" />
+            @endif
+            <input id="image" type="file" wire:change="$dispatch('fileChosen')">
+        </section>
         <form class="my-4 flex" wire:submit.prevent="addComment">
 
             <input type="text" class="form-control rounded-0" placeholder="What's in your mind."
@@ -36,3 +43,23 @@
         {{ $comments->links('pagination-links') }}
     </div>
 </div>
+
+<script>
+    document.addEventListener('livewire:initialized', () => {
+        @this.on('fileChosen', (event) => {
+            // alert('File Chosen');
+            let inputField = document.getElementById('image');
+            let file = inputField.files[0];
+            let reader = new FileReader();
+
+            reader.onloadend = () => {
+                // console.log(reader.result);
+                @this.dispatch('fileUpload', {
+                    'imageData': reader.result
+                });
+            }
+
+            reader.readAsDataURL(file);
+        });
+    });
+</script>

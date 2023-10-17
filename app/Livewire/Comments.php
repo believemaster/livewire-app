@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Models\Comment;
 use Carbon\Carbon;
+use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -11,6 +12,15 @@ class Comments extends Component
 {
     use WithPagination;
     public $newComment;
+    public $image;
+
+
+    #[On('fileUpload')]
+    public function handleFileUpload($imageData)
+    {
+        // dd($imageData);
+        $this->image = $imageData;
+    }
 
     public function updated($newComment)
     {
@@ -38,7 +48,7 @@ class Comments extends Component
     public function render()
     {
         return view('livewire.comments', [
-            'comments' => Comment::orderByDesc('created_at')->simplePaginate(3) 
+            'comments' => Comment::orderByDesc('created_at')->simplePaginate(3)
         ]);
     }
 }
