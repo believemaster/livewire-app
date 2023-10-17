@@ -38,7 +38,7 @@ class Comments extends Component
     public function render()
     {
         return view('livewire.comments', [
-            'comments' => Comment::orderByDesc('created_at')->paginate(3) 
+            'comments' => Comment::orderByDesc('created_at')->simplePaginate(3) 
         ]);
     }
 }
