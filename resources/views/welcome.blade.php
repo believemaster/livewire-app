@@ -10,7 +10,7 @@
 <body>
     <h2 class="text-center">Livewire Learning</h2>
     <hr>
-    <livewire:comments />
+    <livewire:comments  />
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
