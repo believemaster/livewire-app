@@ -3,7 +3,8 @@
         <h1 class="fw-bold">Comments</h1>
         <form class="my-4 flex" wire:submit.prevent="addComment">
             <input type="text" class="form-control rounded-0" placeholder="What's in your mind."
-                wire:model.lazy="newComment" />
+                wire:model.live="newComment" />
+                @error('newComment') <span class="text-danger">{{ $message }}</span> @enderror
             <div class="py-2">
                 <button type="submit" class="p-2 btn btn-info btn-sm rounded-0 shadow text-white">Add</button>
             </div>

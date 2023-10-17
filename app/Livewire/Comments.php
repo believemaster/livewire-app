@@ -17,13 +17,16 @@ class Comments extends Component
         $this->comments = $initialcomment;
     }
 
+    public function updated($newComment)
+    {
+        $this->validateOnly($newComment, ['newComment' => 'required|max:255']);
+    }
+
     public function addComment()
     {
-        if ($this->newComment == "") {
-            return;
-        }
+        $this->validate(['newComment' => 'required|max:255']);
 
-        $createdComment = Comment::create(['body'=>$this->newComment, 'user_id' => 1]);
+        $createdComment = Comment::create(['body' => $this->newComment, 'user_id' => 1]);
         $this->comments->prepend($createdComment);
         $this->newComment = "";
     }
