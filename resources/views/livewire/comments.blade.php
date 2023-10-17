@@ -27,6 +27,7 @@
         @forelse ($comments as $comment)
             <div class="rounded-0 border shadow p-3 my-2">
                 <div class="flex justify-start my-2">
+
                     <p class="fw-bold">{{ $comment->creator->name }}
                         <small class="mx-3 py-1 text-muted">({{ $comment->created_at->diffForHumans() }})</small>
                         <a href="#" class="float-end text-danger" wire:click="remove({{ $comment->id }})">
