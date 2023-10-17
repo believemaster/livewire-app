@@ -33,6 +33,6 @@
             No Comments
         @endforelse
 
-        {{ $comments->links() }}
+        {{ $comments->links('pagination-links') }}
     </div>
 </div>
