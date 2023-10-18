@@ -71,7 +71,9 @@ class Comments extends Component
     {
         $comment = Comment::find($commentId);
 
-        Storage::disk('public')->delete($comment->image);
+        if ($this->image != NULL) {
+            Storage::disk('public')->delete($comment->image);
+        } 
 
         $comment->delete();
 
