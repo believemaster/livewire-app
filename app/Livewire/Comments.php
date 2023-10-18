@@ -16,6 +16,7 @@ class Comments extends Component
     use WithPagination;
     public $newComment;
     public $image;
+    public $ticketId;
 
 
     #[On('fileUpload')]
@@ -23,6 +24,12 @@ class Comments extends Component
     {
         // dd($imageData);
         $this->image = $imageData;
+    }
+
+    #[On('ticketSelected')]
+    public function ticketSelected($ticketId)
+    {
+        $this->ticketId = $ticketId;
     }
 
     public function updated($newComment)
@@ -39,6 +46,7 @@ class Comments extends Component
             'body' => $this->newComment,
             'image' => $image,
             'user_id' => 1,
+            'support_ticket_id' => $this->ticketId
         ]);
 
         $this->newComment = "";
@@ -72,7 +80,7 @@ class Comments extends Component
     public function render()
     {
         return view('livewire.comments', [
-            'comments' => Comment::orderByDesc('created_at')->simplePaginate(3)
+            'comments' => Comment::where('support_ticket_id', $this->ticketId)->orderByDesc('created_at')->simplePaginate(3)
         ]);
     }
 }
