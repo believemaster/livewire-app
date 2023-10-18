@@ -63,6 +63,8 @@ class Comments extends Component
     {
         $comment = Comment::find($commentId);
 
+        Storage::disk('public')->delete($comment->image);
+
         $comment->delete();
 
         session()->flash('message', 'Comment removed successfully 😃');
